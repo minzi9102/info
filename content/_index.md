@@ -8,7 +8,7 @@ toc: false
 ## Explore
 
 {{< cards >}}
-  {{< card link="Blogs" title="博客" icon="book-open" >}}
+  {{< card link="blog" title="博客集" icon="book-open" >}}
   {{< card link="about" title="个人信息" icon="user" >}}
 {{< /cards >}}
 
