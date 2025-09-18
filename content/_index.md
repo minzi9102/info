@@ -3,13 +3,13 @@ title: My Site
 toc: false
 ---
 
-This is the landing page.
+陈敏杰的主页.
 
 ## Explore
 
 {{< cards >}}
-  {{< card link="docs" title="Docs" icon="book-open" >}}
-  {{< card link="about" title="About" icon="user" >}}
+  {{< card link="Blogs" title="博客" icon="book-open" >}}
+  {{< card link="about" title="个人信息" icon="user" >}}
 {{< /cards >}}
 
 ## Documentation
