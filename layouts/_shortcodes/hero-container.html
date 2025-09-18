@@ -1,0 +1,46 @@
+{{- /* --- 参数获取部分 --- */ -}}
+{{- $image := .Get "image" -}}
+{{- $subtitle := .Get "subtitle" -}}
+{{- $button_link := .Get "button_link" -}}
+{{- $button_text := .Get "button_text" -}}
+
+{{- /* --- URL 和图片路径处理 --- */ -}}
+{{- $external := hasPrefix $button_link "http" -}}
+{{- $href := cond (hasPrefix $button_link "/") ($button_link | relURL) $button_link -}}
+{{- if hasPrefix $image "/" -}}
+{{- $image = relURL (strings.TrimPrefix "/" $image) -}}
+{{- end -}}
+
+{{- /* --- HTML 结构和布局 --- */ -}}
+<div class="hextra-hero-container hx:max-w-2xl hx:mx-auto hx:py-1 hx:grid hx:gap-8 hx:items-center hx:md:grid-cols-2 not-prose">
+
+  <div class="hx:flex hx:flex-col hx:justify-center hx:md:col-span-1">
+    <h1
+      class="not-prose hx:text-4xl hx:font-bold hx:leading-tight hx:tracking-tighter hx:md:text-4xl hx:bg-clip-text hx:text-transparent hx:bg-gradient-to-r hx:from-gray-900 hx:to-gray-600 hx:dark:from-gray-100 hx:dark:to-gray-400">
+      {{ .Inner | markdownify }}
+    </h1>
+
+    {{ if $subtitle }}
+    <p class="not-prose hx:mt-4 hx:text-2xl hx:text-gray-600 hx:dark:text-gray-400">
+      {{ $subtitle | markdownify }}
+    </p>
+    {{ end }}
+
+    {{ if $button_text }}
+    <div class="hx:mt-8">
+      <a href="{{ $href }}"
+        class="not-prose hx:font-medium hx:cursor-pointer hx:px-6 hx:py-3 hx:rounded-full hx:text-center hx:text-white hx:inline-block hx:bg-primary-600 hx:hover:bg-primary-700 hx:focus:outline-none hx:focus:ring-4 hx:focus:ring-primary-300 hx:dark:bg-primary-600 hx:dark:hover:bg-primary-700 hx:dark:focus:ring-primary-800 hx:transition-all hx:ease-in hx:duration-200"
+        {{ if $external }}target="_blank" rel="noreferrer" {{ end }}>
+        {{- $button_text -}}
+      </a>
+    </div>
+    {{ end }}
+  </div>
+
+  {{ if $image }}
+  <div class="hx:flex hx:items-center hx:justify-center hx:md:col-span-1 hx:max-md:hidden">
+    <img src="{{ $image }}" class="hx:max-w-1xl hx:h-auto" alt="Logo" />
+  </div>
+  {{ end }}
+
+</div>
